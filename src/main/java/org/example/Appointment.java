@@ -5,15 +5,17 @@ public class Appointment {
     private String doctorName;
     private String patientName;
     private String dateAppointment;
-    private String timeAppointment;
+    private String dayAppointment;
     private String servicesDoctor;
+    private String timeAppointment;
 
-    public Appointment(String doctorName, String patientName, String dateAppointment, String timeAppointment, String servicesDoctor) {
+    public Appointment(String doctorName, String patientName, String dateAppointment, String dayAppointment, String servicesDoctor, String timeAppointment) {
         this.doctorName = doctorName;
         this.patientName = patientName;
         this.dateAppointment = dateAppointment;
-        this.timeAppointment = timeAppointment;
+        this.dayAppointment = dayAppointment;
         this.servicesDoctor = servicesDoctor;
+        this.timeAppointment = timeAppointment;
     }
 
     public Appointment() {}
@@ -26,8 +28,8 @@ public class Appointment {
         return dateAppointment;
     }
 
-    public String getTimeAppointment() {
-        return timeAppointment;
+    public String getDayAppointment() {
+        return dayAppointment;
     }
 
     public String getPatientName() {
@@ -38,12 +40,19 @@ public class Appointment {
         return servicesDoctor;
     }
 
+    public String getTimeAppointment() { return timeAppointment; }
+
+    public void setTimeAppointment(String timeAppointment) { this.timeAppointment = timeAppointment; }
+
     @Override
     public String toString() {
         return "Doctor: " + doctorName +
                 ", Patient: " + patientName +
                 ", Date: " + dateAppointment +
-                ", Time: " + timeAppointment +
-                ", Services: " + servicesDoctor;
+                ", Day: " + dayAppointment +
+                ", Services: " + servicesDoctor +
+                ", Time: " + timeAppointment;
     }
+
+
 }

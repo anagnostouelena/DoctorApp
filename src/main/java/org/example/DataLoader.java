@@ -11,8 +11,8 @@ public class DataLoader {
     public static List<Doctor> loadDoctors() {
         List<Doctor> doctors = new ArrayList<>();
 
-        doctors.add(new Doctor("docjohn", "pass123", "John", "Doe", "Cardiologist", 45, "6981234567"));
-        doctors.add(new Doctor("docjane", "pass456", "Jane", "Smith", "Cardiologist", 40, "6999876543"));
+        doctors.add(new Doctor("PetrAlm1", "1995", "Petros", "Almiros", "Cardiologist", 30, "697802051"));
+        doctors.add(new Doctor("Nikosad99", "8011", "Nikos", "Adreou", "Cardiologist", 36, "697540022"));
         return doctors;
     }
 
@@ -22,21 +22,22 @@ public class DataLoader {
         List<Diagnosis> diagnoses2 = new ArrayList<>();
         List<Diagnosis> diagnoses3 = new ArrayList<>();
 
-        diagnoses1.add(new Diagnosis("High blood presure"));
-        diagnoses2.add(new Diagnosis("Diabetic blood presure"));
-        diagnoses3.add(new Diagnosis("Astma"));
+        diagnoses1.add(new Diagnosis("Arithmia"));
+        diagnoses2.add(new Diagnosis("Arithmia"));
+        diagnoses3.add(new Diagnosis("Arithmia"));
 
-        patients.add(new Patient("Alice",30,"1234567880",diagnoses1));
-        patients.add(new Patient("Bob",30,"1234567890",diagnoses2));
-        patients.add(new Patient("Charlie",30,"1234567890",diagnoses3));
+        patients.add(new Patient("Anastasia Panagou",60,"697363676",diagnoses1));
+        patients.add(new Patient("Eua Kalergh",79,"1234567890",diagnoses2));
+        patients.add(new Patient("Ioanna Kokkinou",80,"1234567890",diagnoses3));
 
         return patients;
     }
     public static List<Appointment> loadAppointments() {
         List<Appointment> appointments = new ArrayList<>();
 
-        appointments.add(new Appointment("John Doe", "Alice", "2025-06-20", "10:00", "Cardiology Consultation"));
-        appointments.add(new Appointment("Jane Smith", "Bob", "2025-06-20", "11:00", "Cardiology Consultation"));
+        appointments.add(new Appointment("Petros", "Anastasia Panagou", "20-04-2025", "Monday", "Cardiology", "13:00"));
+        appointments.add(new Appointment("Nikos", "Eua Kalergh", "20-04-2025", "Monday", "Cardiology", "18:00"));
+        appointments.add(new Appointment("Petros", "Ioanna kokkinou", "12-04-2025", "Friday", "Cardiology", "17:00"));
 
 return appointments;
 

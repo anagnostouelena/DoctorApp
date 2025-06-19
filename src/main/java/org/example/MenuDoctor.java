@@ -1,5 +1,9 @@
 package org.example;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,7 +27,7 @@ public class MenuDoctor {
             System.out.println("Menu Doctor");
             System.out.println("1. Edit Patient personal information");
             System.out.println("2. Add Diagnosis to Patient");
-            System.out.println("3. View Appointments by Date");
+            System.out.println("3. View Appointments by Day");
             System.out.println("4. View Appointments by Time:");
             System.out.println("5. Exit");
             option = input.nextInt();
@@ -36,7 +40,7 @@ public class MenuDoctor {
                     addDiagnosisToPatient();
                     break;
                 case 3:
-                    viewAppointmentsByDate();
+                    viewAppointmentsByDay();
                     break;
                 case 4:
                     viewAppointmentsByTimeRange();
@@ -91,7 +95,7 @@ public class MenuDoctor {
         System.out.println("Patient not found");
     }
 
-    private void viewAppointmentsByDate() {
+    private void viewAppointmentsByDay() {
         System.out.println("Enter the date of the appointment");
         String date = scanner.nextLine();
         boolean flag = false;
@@ -108,21 +112,28 @@ public class MenuDoctor {
     }
 
     private void viewAppointmentsByTimeRange() {
-        System.out.println("Enter the start time of the appointment");
-        String startTime = scanner.nextLine();
-        System.out.println("Enter the end time of the appointment");
-        String endTime = scanner.nextLine();
-        boolean flag = false;
-        for (Appointment appointment : appointment) {
-            String time = appointment.getTimeAppointment();
-            if(appointment.getTimeAppointment().equalsIgnoreCase(startTime) && appointment.getTimeAppointment().equalsIgnoreCase(endTime)) {
-                System.out.println(appointment);
-                flag = true;
-            }
-        }
+        System.out.println("Enter the start time of the appointment (e.g. 18:00)");
+        String startTimeA = scanner.nextLine();
 
-        if(!flag) {
-            System.out.println("Appointment not found");
+        System.out.println("Enter the end time of the appointment (e.g. 21:00)");
+        String endTimeB = scanner.nextLine();
+
+        try{
+            LocalTime startTime =LocalTime.parse(startTimeA, DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime endTime = LocalTime.parse(endTimeB, DateTimeFormatter.ofPattern("HH:mm"));
+
+            boolean found = false;
+            for (Appointment appointment : appointment) {
+                LocalTime appointmentTime = LocalTime.parse(appointment.getTimeAppointment(), DateTimeFormatter.ofPattern("HH:mm"));
+
+                if(!appointmentTime.isBefore(startTime) && appointmentTime.isAfter(endTime)) {
+                    System.out.println(appointment);
+                    found = true;
+                }
+            }
+        }catch(DateTimeParseException e) {
+            System.out.println("Invalid date or time format (e.g. 18:00)");
         }
     }
+
 }

@@ -17,8 +17,14 @@ public class AppoitmentManager {
 
     public void addNewAppointment() {
 
-        System.out.println("Enter the name of doctor");
-        String doctor = scanner.nextLine();
+        System.out.println("Enter the user name of doctor");
+        String username = scanner.nextLine();
+
+        String fullName= findDoctorFullNameByUsername(username);
+        if (fullName == null) {
+            System.out.println("Doctor not found");
+            return;
+        }
 
         System.out.println("Enter patient's name");
         String patientName = scanner.nextLine();
@@ -26,13 +32,16 @@ public class AppoitmentManager {
         System.out.println("Enter the date of the appointment");
         String date = scanner.nextLine();
 
-        System.out.println("Enter the time of the appointment");
-        String time = scanner.nextLine();
+        System.out.println("Enter the day of the appointment");
+        String day = scanner.nextLine();
 
         System.out.println("Enter services");
         String services = scanner.nextLine();
 
-        Appointment newAppointment = new Appointment(doctor, patientName, date, time, services);
+        System.out.println("Enter the time of the appointment");
+        String time = scanner.nextLine();
+
+        Appointment newAppointment = new Appointment(fullName, patientName, date, day, services, time);
         appointments.add(newAppointment);
 
         System.out.println("Appointment added!");
@@ -42,7 +51,7 @@ public class AppoitmentManager {
         System.out.println("Viewing appointments");
         System.out.println("1. Show by doctor username");
         System.out.println("2. Show by date");
-        System.out.println("3. Show by time");
+        System.out.println("3. Show by day");
         int option = Integer.parseInt(scanner.nextLine());
 
         switch (option) {
@@ -54,15 +63,20 @@ public class AppoitmentManager {
                     System.out.println("Doctor not found");
                     return;
                 }
+                int count = 0;
                 for (Appointment a : appointments) {
                     if (a.getDoctorName().equalsIgnoreCase(fullName)) {
                         System.out.println(a);
+                        count++;
                     }
+                }
+                if (count == 0){
+                    System.out.println("Appointment not found for doctor" + fullName);
                 }
                 break;
 
             case 2:
-                System.out.print("Enter date (YYYY-MM-DD): ");
+                System.out.print("Enter date (e.g 03-01-2025): ");
                 String date = scanner.nextLine();
                 for (Appointment a : appointments) {
                     if (a.getDateAppointment().equalsIgnoreCase(date)) {
@@ -72,10 +86,10 @@ public class AppoitmentManager {
                 break;
 
             case 3:
-                System.out.print("Enter time (HH:MM): ");
-                String time = scanner.nextLine();
+                System.out.print("Enter day (e.g Monday): ");
+                String day = scanner.nextLine();
                 for (Appointment a : appointments) {
-                    if (a.getTimeAppointment().equalsIgnoreCase(time)) {
+                    if (a.getDayAppointment().equalsIgnoreCase(day)) {
                         System.out.println(a);
                     }
                 }
